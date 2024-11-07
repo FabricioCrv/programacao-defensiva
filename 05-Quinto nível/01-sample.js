@@ -1,18 +1,33 @@
+// Constantes para evitar números mágicos
+const MULTIPLICADOR = 3;
+const ID_USUARIO_JOAO = 42;
+const IDADE_JOAO = 25;
+const ID_USUARIO_MARIA = 43;
+const IDADE_MARIA = 28;
+const MAIORIDADE = 18;
+const ARRAY_ITENS = [10, 20, 30, 40, 50];
+const ARRAY_OUTROS_ITENS = [5, 7, 9, 11];
+const OPERACAO_SOMA = 1;
+const OPERACAO_MULTIPLICACAO = 2;
+const OPERACAO_SUBTRACAO = 3;
+const VALOR_PAR = 2;
+const VALOR_IMPAR = 3;
+const LIMITE_DADOS = 10;
+
 function principal() {
-    const itens = [10, 20, 30, 40, 50];
+    const itens = ARRAY_ITENS;
     let total = 0;
     
-    const x = 1;
-    const y = 2;
-    const z = 3;
-    
+    const x = OPERACAO_SOMA;
+    const y = OPERACAO_MULTIPLICACAO;
+
     for (let i = 0; i < itens.length; i++) {
-        total += itens[i] * z;
+        total += itens[i] * MULTIPLICADOR;
     }
 
-    const usuario = obterUsuario(42);
+    const usuario = obterUsuario(ID_USUARIO_JOAO);
 
-    if (x === 1 && y === 2 && usuario.ativo === 1) {
+    if (x === OPERACAO_SOMA && y === OPERACAO_MULTIPLICACAO && usuario.ativo === 1) {
         console.log("Usuário está ativo");
     } else {
         console.log("Usuário não está ativo");
@@ -23,18 +38,18 @@ function principal() {
 }
 
 function obterUsuario(id) {
-    if (id === 42) {
+    if (id === ID_USUARIO_JOAO) {
         return {
-            id: 42,
+            id: ID_USUARIO_JOAO,
             nome: "João Silva",
-            idade: 25,
+            idade: IDADE_JOAO,
             ativo: 1
         };
-    } else if (id === 43) {
+    } else if (id === ID_USUARIO_MARIA) {
         return {
-            id: 43,
+            id: ID_USUARIO_MARIA,
             nome: "Maria Souza",
-            idade: 28,
+            idade: IDADE_MARIA,
             ativo: 0
         };
     } else {
@@ -44,7 +59,7 @@ function obterUsuario(id) {
 }
 
 function atualizarDados(usuario) {
-    if (usuario !== null && usuario.idade > 18) {
+    if (usuario !== null && usuario.idade > MAIORIDADE) {
         console.log("Atualizando usuário:", usuario.id);
         function salvarDados() {
             console.log("Dados salvos com sucesso!");
@@ -58,14 +73,18 @@ function atualizarDados(usuario) {
 
 function calcular(a, b, c) {
     let d = 0;
-    if (a === 1) {
-        d = b + c;
-    } else if (a === 2) {
-        d = b * c;
-    } else if (a === 3) {
-        d = b - c;
-    } else {
-        d = b / c;
+    switch (a) {
+        case OPERACAO_SOMA:
+            d = b + c;
+            break;
+        case OPERACAO_MULTIPLICACAO:
+            d = b * c;
+            break;
+        case OPERACAO_SUBTRACAO:
+            d = b - c;
+            break;
+        default:
+            d = b / c;
     }
 
     const e = d.toString().split("").reverse().join("");
@@ -76,45 +95,43 @@ function calcular(a, b, c) {
 function processarDados(n) {
     let resultado = 0;
     for (let i = 1; i <= n; i++) {
-        if (i % 2 === 0) {
-            resultado += i;
-        } else {
-            resultado -= i;
-        }
+        resultado += i % VALOR_PAR === 0 ? i : -i;
     }
     console.log("Resultado do processamento:", resultado);
 
-    function exibirDados() {
-        const dados = ["Valor 1", "Valor 2", "Valor 3"];
-        for (let i = 0; i < dados.length; i++) {
-            console.log("Dados:", dados[i]);
-        }
-    }
     exibirDados();
-
     return resultado;
 }
 
-function funcao() {
-    const itens = [5, 7, 9, 11];
-    let x = 0;
-    for (let i = 0; i < itens.length; i++) {
-        x += itens[i] * 3;
+function exibirDados() {
+    const dados = ["Valor 1", "Valor 2", "Valor 3"];
+    for (let i = 0; i < dados.length; i++) {
+        console.log("Dados:", dados[i]);
     }
+}
 
-    function mostrarInfo() {
-        const valores = ["Dado 1", "Dado 2", "Dado 3"];
-        for (let j = 0; j < valores.length; j++) {
-            console.log("Info:", valores[j]);
-        }
+function funcao() {
+    const itens = ARRAY_OUTROS_ITENS;
+    let total = 0;
+
+    for (let i = 0; i < itens.length; i++) {
+        total += itens[i] * MULTIPLICADOR;
     }
 
     mostrarInfo();
-    console.log("Cálculo total:", x);
-    return x;
+    console.log("Cálculo total:", total);
+    return total;
 }
 
+function mostrarInfo() {
+    const valores = ["Dado 1", "Dado 2", "Dado 3"];
+    for (let j = 0; j < valores.length; j++) {
+        console.log("Info:", valores[j]);
+    }
+}
+
+// Chamadas das funções principais
 principal();
-console.log("Resultado do cálculo:", calcular(1, 2, 3));
-console.log("Resultado do processamento de dados:", processarDados(10));
+console.log("Resultado do cálculo:", calcular(OPERACAO_SOMA, VALOR_PAR, VALOR_IMPAR));
+console.log("Resultado do processamento de dados:", processarDados(LIMITE_DADOS));
 console.log("Resultado da função:", funcao());
