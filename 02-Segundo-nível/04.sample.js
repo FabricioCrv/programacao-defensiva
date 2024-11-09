@@ -1,15 +1,17 @@
+const SENHA_CORRETA = '12345';
+const MAX_TENTATIVAS = 3;
+
 function tentarLogin(senha) {
-    let tentativas = 0;
-    const senhaCorreta = "12345";
+  let tentativas = 0;
 
-    while (tentativas < 3) {
-        if (senha === senhaCorreta) {
-            return "Login efetuado com sucesso!";
-        }
-        tentativas++;
+  while (tentativas < MAX_TENTATIVAS) {
+    if (senha === SENHA_CORRETA) {
+      return 'Login efetuado com sucesso!';
     }
+    tentativas++;
+  }
 
-    return "Tentativas de login excedidas.";
+  return 'Tentativas de login excedidas.';
 }
 
-console.log(tentarLogin("123"));
+console.log(tentarLogin('123'));
