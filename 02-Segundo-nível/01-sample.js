@@ -8,4 +8,4 @@ function calcularDesconto(precoOriginal) {
 }
 
 const precoFinal = calcularDesconto(100);
-console.log(`Preço com desconto: ${precoFinal}`);
+console.log("Preço com desconto: " + precoFinal);
