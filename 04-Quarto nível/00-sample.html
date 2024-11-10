@@ -15,51 +15,61 @@
             <input type="number" id="personagemId" class="form-control" placeholder="Ex: 1 para Luke Skywalker">
         </div>
 
-        <button class="btn btn-primary" onclick="buscarPersonagem()">Buscar Personagem</button>
+        <!-- Botão de busca, com o ID correto -->
+        <button id="botaoBuscar" class="btn btn-primary">Buscar Personagem</button>
 
         <div id="mensagem" class="mt-3"></div>
     </div>
 
     <script>
       async function buscarPersonagem() {
-        const mensagemDiv = document.getElementById('mensagem');
-        mensagemDiv.innerHTML = '';
+        const mensagemDiv = document.getElementById("mensagem");
+        mensagemDiv.innerHTML = "";
 
-        const id = document.getElementById('personagemId').value;
+        const id = document.getElementById("personagemId").value;
 
         if (!id || id <= 0) {
-          mostrarErro('ID inválido. Insira um número positivo.', 'danger');
-          return;
+            mostrarErro("ID inválido. Insira um número positivo.", "danger");
+            return;
         }
 
         try {
-          const resposta = await fetch(`https://swapi.dev/api/people/${id}/`);
+            const resposta = await fetch(`https://swapi.dev/api/people/${id}/`);
 
-          if (!resposta.ok) {
-            throw new Error('Personagem não encontrado. Verifique o ID e tente novamente.');
-          }
+            if (!resposta.ok) {
+                throw new Error("Personagem não encontrado. Verifique o ID e tente novamente.");
+            }
 
-          const personagem = await resposta.json();
-          mostrarResultado(personagem);
+            const personagem = await resposta.json();
+            mostrarResultado(personagem);
         } catch (erro) {
-          mostrarErro(erro.message, 'danger');
+            mostrarErro(erro.message, "danger");
         }
       }
 
       function mostrarErro(mensagem, tipo) {
-        const mensagemDiv = document.getElementById('mensagem');
+        const mensagemDiv = document.getElementById("mensagem");
         mensagemDiv.innerHTML = `<div class="alert alert-${tipo}" role="alert">${mensagem}</div>`;
       }
 
       function mostrarResultado(personagem) {
-        const mensagemDiv = document.getElementById('mensagem');
+        const mensagemDiv = document.getElementById("mensagem");
         mensagemDiv.innerHTML = `
-          <div class="alert alert-success" role="alert">
-            <strong>Nome:</strong> ${personagem.name}<br>
-            <strong>Altura:</strong> ${personagem.height} cm<br>
-            <strong>Peso:</strong> ${personagem.mass} kg
-          </div>`;
+        <div class="alert alert-success" role="alert">
+          <strong>Nome:</strong> ${personagem.name}<br>
+          <strong>Altura:</strong> ${personagem.height} cm<br>
+          <strong>Peso:</strong> ${personagem.mass} kg
+        </div>`;
       }
+
+      // Event listener para o carregamento da página
+      document.addEventListener("DOMContentLoaded", () => {
+        const botaoBuscar = document.getElementById("botaoBuscar");
+    
+        if (botaoBuscar) {
+            botaoBuscar.addEventListener("click", buscarPersonagem);
+        }
+      });
     </script>
 </body>
 </html>
