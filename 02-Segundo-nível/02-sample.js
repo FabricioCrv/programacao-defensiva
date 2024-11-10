@@ -1,4 +1,5 @@
 const IDADE_MINIMA = 18;
+const idade_usuario = 16;
 
 function verificarSePodeDirigir(idade) {
     if (idade >= IDADE_MINIMA) {
@@ -7,4 +8,5 @@ function verificarSePodeDirigir(idade) {
     return "Não pode dirigir";
 }
 
-console.log(verificarSePodeDirigir(16));
+
+console.log(verificarSePodeDirigir(idade_usuario));

@@ -34,5 +34,5 @@ function calcularSalarioFuncionario(horasTrabalhadas, valorHora, cargo) {
     return salarioFinal;
 }
 
-const salario = calcularSalarioFuncionario(160, 25, "gerente");
+const salario = calcularSalarioFuncionario("160", "25", "gerente");
 console.log(`O salário final é: ${salario}`);
