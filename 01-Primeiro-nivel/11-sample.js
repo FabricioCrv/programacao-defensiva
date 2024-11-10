@@ -117,8 +117,12 @@ users[0].estarAtivo();
 users[1].ehAdmin();
 
 const max_tentativas = 4;
-loginTries(users[2], max_tentativas);
 
-console.log(loginMaisRecente(users[0], users[3]));
+const usuario_tentativa = 2;
+loginTries(users[usuario_tentativa], max_tentativas);
 
-usuarioRecente(users[3]);
+const usuario_recente = 3;
+
+console.log(loginMaisRecente(users[0], users[usuario_recente]));
+
+usuarioRecente(users[usuario_recente]);
